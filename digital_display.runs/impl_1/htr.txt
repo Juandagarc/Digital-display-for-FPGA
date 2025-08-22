@@ -7,4 +7,4 @@
 # Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
 #
 
-vivado -log top_display_controller_10bit.vdi -applog -m64 -product Vivado -messageDb vivado.pb -mode batch -source top_display_controller_10bit.tcl -notrace
+vivado -log top_hex_display_controller.vdi -applog -m64 -product Vivado -messageDb vivado.pb -mode batch -source top_hex_display_controller.tcl -notrace

@@ -37,4 +37,4 @@ EAStep()
      fi
 }
 
-EAStep vivado -log top_display_controller_10bit.vds -m64 -product Vivado -mode batch -messageDb vivado.pb -notrace -source top_display_controller_10bit.tcl
+EAStep vivado -log top_hex_display_controller.vds -m64 -product Vivado -mode batch -messageDb vivado.pb -notrace -source top_hex_display_controller.tcl

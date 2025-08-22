@@ -1,62 +1,45 @@
-module top_display_controller_10bit (
-    // Entradas
-    input wire [9:0] binary_input,    // La entrada binaria principal de 10 bits de los switches
-    input wire       negate_button,   // Botón para activar el complemento a 2 (negativo)
+module top_hex_display_controller (
+    input wire [9:0] binary_input,
+    input wire       negate_button,
 
-    // Salidas
-    output wire [9:0] led_outputs,     // Salida para encender un LED por cada switch activado
-    output wire [6:0] segments_d3,     // Dígito de los millares
-    output wire [6:0] segments_d2,     // Dígito de las centenas
-    output wire [6:0] segments_d1,     // Dígito de las decenas
-    output wire [6:0] segments_d0      // Dígito de las unidades
+    output wire [9:0] led_outputs,
+    output wire [6:0] segments_d2, // Dígito más a la izquierda (0-3)
+    output wire [6:0] segments_d1, // Dígito del medio (0-F)
+    output wire [6:0] segments_d0  // Dígito más a la derecha (0-F)
 );
 
-    // --- Lógica para los LEDs ---
-    // Conecta directamente la entrada de los switches a la salida de los LEDs.
-    // Así, si un switch está en '1', su LED correspondiente se encenderá.
+    // Conexión directa de switches a LEDs
     assign led_outputs = binary_input;
 
-    // --- Lógica para el Complemento a 2 ---
-    // Wire para almacenar el valor que se enviará a los displays.
-    // Será el número original o su versión en negativo (complemento a 2).
+    // Lógica del complemento a 2 (sigue funcionando igual)
     wire [9:0] display_value;
-
-    // Si el botón 'negate_button' está presionado (valor 1), calcula el complemento a 2.
-    // Si no, usa el valor binario original.
     assign display_value = negate_button ? (~binary_input + 1'b1) : binary_input;
 
-    // --- Lógica de Visualización (sin cambios) ---
-    // Cable para los 4 dígitos BCD (16 bits)
-    wire [15:0] bcd_digits;
+    // --- LÓGICA DE DIVISIÓN PARA HEXADECIMAL ---
+    wire [3:0] hex_d2; // Nibble para el dígito 2
+    wire [3:0] hex_d1; // Nibble para el dígito 1
+    wire [3:0] hex_d0; // Nibble para el dígito 0
 
-    // Instancia del conversor de binario a BCD.
-    // Ahora usa 'display_value' como entrada.
-    translator bcd_converter (
-        .binary_in(display_value),
-        .bcd_out(bcd_digits)
-    );
+    assign hex_d2 = {2'b00, display_value[9:8]}; // Bits 9 y 8. Rellenamos con 0s a la izquierda.
+    assign hex_d1 = display_value[7:4];         // Bits 7 al 4
+    assign hex_d0 = display_value[3:0];         // Bits 3 al 0
 
-    // Dígito 3 (Millares)
-    bcd_to_7_segment decoder_d3 (
-        .bcd_in(bcd_digits[15:12]),
-        .segments(segments_d3)
-    );
-
-    // Dígito 2 (Centenas)
-    bcd_to_7_segment decoder_d2 (
-        .bcd_in(bcd_digits[11:8]),
+    // --- INSTANCIAS DE LOS DECODIFICADORES HEX --
+    // Dígito 2 (MSB)
+    hex_to_7_segment decoder_d2 (
+        .hex_in(hex_d2),
         .segments(segments_d2)
     );
 
-    // Dígito 1 (Decenas)
-    bcd_to_7_segment decoder_d1 (
-        .bcd_in(bcd_digits[7:4]),
+    // Dígito 1
+    hex_to_7_segment decoder_d1 (
+        .hex_in(hex_d1),
         .segments(segments_d1)
     );
 
-    // Dígito 0 (Unidades)
-    bcd_to_7_segment decoder_d0 (
-        .bcd_in(bcd_digits[3:0]),
+    // Dígito 0 (LSB)
+    hex_to_7_segment decoder_d0 (
+        .hex_in(hex_d0),
         .segments(segments_d0)
     );
 

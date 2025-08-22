@@ -39,6 +39,6 @@ EAStep()
 
 # pre-commands:
 /bin/touch .init_design.begin.rst
-EAStep vivado -log top_display_controller_10bit.vdi -applog -m64 -product Vivado -messageDb vivado.pb -mode batch -source top_display_controller_10bit.tcl -notrace
+EAStep vivado -log top_hex_display_controller.vdi -applog -m64 -product Vivado -messageDb vivado.pb -mode batch -source top_hex_display_controller.tcl -notrace
 
 
