@@ -13,5 +13,5 @@ Para este punto lo que hicimos fue crear una logica de division hexadecimal para
 # Cuarto ejercicio
 Para el cuarto ejercicio que consiste en agregar negativos con el complemento a dos, utilizamos la siguiente formula `assign display_value = ~negate_button ? (~binary_input + 1'b1) : binary_input;` y con una entrada nueva verificamos si el boton para mostrar los negativos está encendido o apagado y realizamos los calculos a consecuencia para calcular el nuevo numero en complemento a 2.
 # Simulación
-![Sim](https://github.com/user-attachments/assets/dccfb538-a5ca-4507-a7e2-be9a8f622839)
+<img width="1380" height="258" alt="image" src="https://github.com/user-attachments/assets/6d196b02-692a-4b56-bbc8-89136603dc83" />
 Para la simulación realizamos varias pruebas para verificar su funcionamiento, en el que podemos ver que los calculos están funcionando.
