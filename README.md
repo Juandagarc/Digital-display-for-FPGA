@@ -1,3 +1,4 @@
+Presentado por: Juan David García Arce y Maximiliano Giraldo Ocampo.
 # Primer ejercicio
 Para el primer ejercicio debemos usar los diez switches del FPGA para encender las correspondientes luces LED en el FPGA.
 Para realizar este punto lo primero que hacemos es iniciar un módulo en Verilog HDL llamada [top_hex_display_controller](digital_display.srcs/sources_1/new/top_display_controller_10bit.v)
