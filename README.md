@@ -8,4 +8,10 @@ las salidas serán iguales a sus respectivas entradas, de esta forma `assign led
 # Segundo y tercer ejercicio
 Estos puntos son muy parecidos así que los incluimos en uno solo. Para este punto requerimos de un módulo [hex_to_7_segment](digital_display.srcs/sources_1/new/hex_to_7_segment.v) con 4 entradas y 7 salidas (representando 4 switches por cada pantalla de 7 segmentos),
 este módulo tiene algo importante que es la lógica para el encendido de cada una de las luces para cada número, por la disposición del FPGA que posee un ánodo común, nuestra lógica está escrita en activo bajo.
-Para este punto ya tenemos todo lo necesario para un bit de la pantalla de 7 segmentos, pero para el siguiente ejercicio requerimos de utilizar más bits. para representar numeros grandes, lo que hacemos es crear 
+Para este punto ya tenemos todo lo necesario para un bit de la pantalla de 7 segmentos, pero para el siguiente ejercicio requerimos de utilizar más bits. para representar numeros grandes, lo que hacemos es crear cada una de las salidas que necesitaremos, en este caso 4 en total. 
+Para este punto lo que hicimos fue crear una logica de division hexadecimal para mostrar en pantalla, y se asignaran a los displays, como tenemos 10 switches,  vamos a crear en total 4 entradas de 4 bits y la conectaremos a 4 pantallas, en este momento para cada 4 switchs se mostrara el numero en la pantalla correspondiente en su valor hexadecimal. Hay que aclarar que el formato que se muestra es 0000, entonces para el bit más significativo (izquierda) solo mostrará 0 y para el siguiente se le añaden 2 ceros, para el resto se asignan los switches correspondientes.
+# Cuarto ejercicio
+Para el cuarto ejercicio que consiste en agregar negativos con el complemento a dos, utilizamos la siguiente formula `assign display_value = ~negate_button ? (~binary_input + 1'b1) : binary_input;` y con una entrada nueva verificamos si el boton para mostrar los negativos está encendido o apagado y realizamos los calculos a consecuencia para calcular el nuevo numero en complemento a 2.
+# Simulación
+![Sim](https://github.com/user-attachments/assets/dccfb538-a5ca-4507-a7e2-be9a8f622839)
+Para la simulación realizamos varias pruebas para verificar su funcionamiento, en el que podemos ver que los calculos están funcionando.
